@@ -69,7 +69,8 @@ export function igniteProjector({ root, reduced, project, complete }: Options) {
   const paintPicture = () => { frame.style.clipPath = `circle(${motion.radius}px at ${originX}px ${originY}px)`; };
   gsap.set(frame, { opacity: 0 });
   gsap.set(rig, { opacity: 0 });
-  tl.to(query('.start-button'), { y: 3, scale: .97, duration: .09 }, 0)
+  tl.to(query('.start-button'), { scale: .98, duration: .09 }, 0)
+    .to(query('.hero-action'), { autoAlpha: 0, duration: .18, ease: 'power1.out' }, 0)
     .to(power, { scale: .82, duration: .1, yoyo: true, repeat: 1 }, 0)
     .to(query('.projector-status-light'), { opacity: 1, duration: .12 }, .12)
     .to(query('[data-reel="one"]'), { rotation: 22, duration: .25, ease: 'power2.in' }, 0)
@@ -87,7 +88,7 @@ export function igniteProjector({ root, reduced, project, complete }: Options) {
     .to(lamp, { opacity: .45, duration: .35 }, .35)
     .to(lamp, { opacity: .95, duration: .3 }, 1.06)
     .to(halo, { opacity: .7, scale: 1, duration: .65, ease: 'power2.out' }, .75)
-    .to(query('.hero-copy'), { y: -10, opacity: 0, duration: .5, ease: 'power2.in' }, .4)
+    .to(query('.hero-heading'), { y: -10, opacity: 0, duration: .5, ease: 'power2.in' }, .4)
     .to(root.querySelectorAll('.intro-side-note, .object-caption'), { opacity: 0, duration: .25 }, .58)
     .call(setOpticalOrigin, [], 1.36)
     .to(rig, { opacity: 1, duration: .22 }, 1.36)
