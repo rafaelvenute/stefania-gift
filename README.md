@@ -54,30 +54,25 @@ Per ricavare nuovamente i media dall'originale:
 node scripts/prepare-media.mjs "PERCORSO_ASSOLUTO/1017.mp4"
 ```
 
-## Attivare Formspree
+## Formspree
 
-L'invio automatico è **disattivato finché manca un endpoint reale**. Copia e WhatsApp funzionano già; WhatsApp prepara il messaggio senza destinatario e richiede che la persona ne completi l'invio.
+Il sito usa un modulo Formspree dedicato a Stefania. L'endpoint pubblico è impostato in `.env.production` e viene incorporato nella build Vite. Il destinatario e le notifiche si gestiscono nel pannello Formspree; nessun indirizzo email è inserito nel frontend. Copia e WhatsApp restano disponibili come alternative manuali.
 
-1. Creare o usare il proprio modulo Formspree.
-2. Copiare `.env.example` in `.env.local`.
-3. Impostare `VITE_FORMSPREE_ENDPOINT` sull'endpoint esatto del proprio modulo, nel formato `https://formspree.io/f/…`.
-4. Riavviare lo sviluppo o ricostruire e pubblicare il sito. Le variabili `VITE_` vengono inserite al momento della build.
-
-L'endpoint pubblico di un modulo non è una chiave segreta. Non inserire credenziali amministrative nella variabile.
-
-L'invio avviene solo dopo **Invia le mie date → revisione → Conferma e invia**. Il payload include nome, date locali, etichette italiane, preferenza, messaggio, timestamp UTC e fuso del browser. Un esito HTTP positivo e una conferma JSON `ok: true` sono necessari per il finale “Date ricevute!”. Errori o timeout mantengono le selezioni. Non è stato eseguito alcun invio reale, perché non è stato fornito un endpoint.
+L'invio avviene solo dopo **Invia le mie date → revisione → Conferma e invia**. Il payload include nome, tutte le date locali selezionate, etichette italiane, preferenza di orario, messaggio, timestamp UTC e fuso del browser. Un esito HTTP positivo e una conferma JSON `ok: true` sono necessari per il finale “Date ricevute!”. Errori o timeout mantengono le selezioni.
 
 Riferimento: [documentazione Formspree sulle richieste AJAX](https://help.formspree.io/articles/building-your-form/submit-forms-with-javascript-ajax).
 
-## Pubblicare come sito statico
+## Pubblicazione
 
-**Vercel:** importare questa cartella come progetto Vite; comando `npm run build`, directory di output `dist`. Configurare l'eventuale variabile Formspree nelle impostazioni prima della build.
+- Sito: https://rafaelvenute.github.io/stefania-gift/
+- Repository: https://github.com/rafaelvenute/stefania-gift
+- GitHub Pages: sorgente **GitHub Actions**; ogni push a `main` esegue test, build e deploy.
+- La build Vite usa `base: '/stefania-gift/'`; lo sviluppo locale conserva i percorsi relativi.
 
-**GitHub Pages o altro hosting statico:** pubblicare il contenuto della cartella `dist` come radice del sito. Il `base: './'` permette l'uso anche in una sottocartella. L'hosting deve servire MP4 con il MIME corretto e supportare le richieste byte-range per i player mobili. Usare HTTPS per copia negli appunti e condivisione nativa.
+La cartella `dist` generata dal workflow viene pubblicata sulla radice del sito Pages. GitHub Pages serve i file MP4 con MIME `video/mp4` e richieste byte-range.
 
 Il pacchetto **stefania-sito-statico.zip**, nella cartella superiore, contiene i file pubblicabili. Il pacchetto **stefania-sorgenti.zip** contiene i sorgenti e i media, senza `node_modules`.
 
-Questa consegna è locale: il connettore Sites non era disponibile per la pubblicazione nella sessione. Nessun URL pubblico è stato creato.
 
 ## Regia e accessibilità
 

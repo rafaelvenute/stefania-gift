@@ -46,7 +46,7 @@ test('Submission sends sorted future dates and an explicit payload only when inv
     request = { url, ...options, payload: JSON.parse(options.body) }; return new Response(JSON.stringify({ ok: true }), { status: 200 });
   });
   assert.equal(request.method, 'POST'); assert.deepEqual(request.payload.dates, ['2099-10-25', '2099-11-02']);
-  assert.equal(request.payload.name, "Stefania D'Amore"); assert.equal(request.payload.time_preference, 'Sera'); assert.ok(request.payload.timezone); assert.ok(Date.parse(request.payload.submitted_at));
+  assert.equal(request.payload.name, "Stefania D'Amore"); assert.equal(request.payload.time_preference, 'Sera'); assert.match(request.payload.availability_summary, /Messaggio di test/); assert.match(request.payload.availability_summary, /25 ottobre 2099/); assert.match(request.payload.availability_summary, /2 novembre 2099/); assert.ok(request.payload.timezone); assert.ok(Date.parse(request.payload.submitted_at));
 });
 test('A network failure or a non-confirming response can never report receipt', async () => {
   for (const result of [{ status: 422, body: { errors: [{ message: 'Invalid' }] } }, { status: 200, body: { ok: false } }, { status: 200, body: {} }]) {
