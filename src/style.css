@@ -51,8 +51,7 @@ dialog{background:#f5e7cd;color:#382719;border:1px solid #d6a64d;border-radius:3
 .cinema-scene.is-projecting{opacity:1;pointer-events:none}
 .scene-starting .intro-scene{pointer-events:none}
 .scene-starting .film-frame{will-change:transform,opacity}
-@media(max-width:650px){.projector-realistic{width:102%;right:-1%;top:44%;transform:translateY(-25%);max-height:none}.projector-realistic .object-caption{display:none}}
-@media(max-height:740px) and (max-width:650px){.projector-realistic{width:86%;right:7%;top:47%;transform:translateY(-35%)}}
+@media(max-width:650px){.projector-realistic{width:min(94vw,max(180px,calc(80dvh - 256px)));left:50%;right:auto;top:49%;transform:translate(-50%,-35%);max-height:none}.projector-realistic .object-caption{display:none}}
 @media(max-height:580px) and (min-width:651px){.projector-realistic{width:50%;right:0;top:48%;transform:translateY(-50%)}}
 /* Rendered optical turn: one transparent atlas, shared with the tracked lens. */
 .projector-static{position:relative;width:100%}
